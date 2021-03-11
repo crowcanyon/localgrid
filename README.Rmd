@@ -1,0 +1,60 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# localgrid
+
+<!-- badges: start -->
+`r lifecycle::badge('experimental')`
+<!-- badges: end -->
+
+The goal of `localgrid` is to make it easy to define coordinate reference 
+systems in the Oblique Mercator projection for new or existing arbitrary 
+floating grids.
+
+## Installation
+
+You can install `localgrid` from Github with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("crowcanyon/localgrid")
+```
+
+## Example
+
+```{r example}
+library(localgrid)
+
+# Define a floating CRS for a new grid
+define_new_grid(
+    pt_0_geo = c(-108.51, 37.385),
+    pt_0_grid = c(500, 500),
+    name = "Great New Grid"
+    )
+
+# Or, define a floating CRS for a legacy grid
+define_legacy_grid(
+    pt_0_geo = c(-108.51, 37.385),
+    pt_0_grid = c(500, 500),
+    pt_1_geo = c(-108.511, 37.384),
+    pt_1_grid = c(360, 380),
+    name = "Screwy Legacy Grid"
+    )
+```
+
+## Code of Conduct
+
+Please note that the localgrid project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). 
+By contributing to this project, you agree to abide by its terms.
