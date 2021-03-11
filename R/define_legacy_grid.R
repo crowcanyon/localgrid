@@ -43,7 +43,7 @@ define_legacy_grid <-
            pt_1_grid,
            name = NULL) {
     datums <-
-      data.frame(
+      tibble::tibble(
         `Float Easting` = c(
           pt_0_grid[[1]],
           pt_1_grid[[1]]
