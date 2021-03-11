@@ -30,55 +30,78 @@
 #'
 #' @examples
 #' define_legacy_grid(
-#'     pt_0_geo = c(-108.51, 37.385),
-#'     pt_0_grid = c(500, 500),
-#'     pt_1_geo = c(-108.511, 37.384),
-#'     pt_1_grid = c(360, 380),
-#'     name = "Screwy Legacy Grid"
-#'     )
+#'   pt_0_geo = c(-108.51, 37.385),
+#'   pt_0_grid = c(500, 500),
+#'   pt_1_geo = c(-108.511, 37.384),
+#'   pt_1_grid = c(360, 380),
+#'   name = "Screwy Legacy Grid"
+#' )
 define_legacy_grid <-
   function(pt_0_geo,
-           pt_0_grid = c(0,0),
+           pt_0_grid = c(0, 0),
            pt_1_geo,
            pt_1_grid,
            name = NULL) {
-
     datums <-
-      tibble::tibble(
-        `Float Easting` = c(pt_0_grid[[1]],
-                            pt_1_grid[[1]]),
-        `Float Northing` = c(pt_0_grid[[2]],
-                             pt_1_grid[[2]]),
-        `GEO Easting` = c(pt_0_geo[[1]],
-                          pt_1_geo[[1]]),
-        `GEO Northing` = c(pt_0_geo[[2]],
-                           pt_1_geo[[2]])
+      data.frame(
+        `Float Easting` = c(
+          pt_0_grid[[1]],
+          pt_1_grid[[1]]
+        ),
+        `Float Northing` = c(
+          pt_0_grid[[2]],
+          pt_1_grid[[2]]
+        ),
+        `GEO Easting` = c(
+          pt_0_geo[[1]],
+          pt_1_geo[[1]]
+        ),
+        `GEO Northing` = c(
+          pt_0_geo[[2]],
+          pt_1_geo[[2]]
+        )
       ) %>%
-      sf::st_as_sf(coords = c("GEO Easting",
-                              "GEO Northing"),
-                   remove = FALSE,
-                   crs = 4326)
+      sf::st_as_sf(
+        coords = c(
+          "GEO Easting",
+          "GEO Northing"
+        ),
+        remove = FALSE,
+        crs = 4326
+      )
 
     datums_omerc <-
-      define_new_grid(pt_0_geo = pt_0_geo,
-                      pt_0_grid = pt_0_grid)
+      define_new_grid(
+        pt_0_geo = pt_0_geo,
+        pt_0_grid = pt_0_grid
+      )
 
     floating_rotation <-
       datums %>%
       sf::st_transform(datums_omerc) %>%
-      dplyr::mutate(`OMERC Easting` =
-                      sf::st_coordinates(geometry)[,'X'],
-                    `OMERC Northing` =
-                      sf::st_coordinates(geometry)[,'Y']) %$%
+      dplyr::mutate(
+        `OMERC Easting` =
+          sf::st_coordinates(geometry)[, "X"],
+        `OMERC Northing` =
+          sf::st_coordinates(geometry)[, "Y"]
+      ) %$%
       {
-        (180/pi) *
+        (180 / pi) *
           (
-            do.call(atan2,
-                    list(diff(`Float Northing`[c(1,2)]),
-                         diff(`Float Easting`[c(1,2)]))) -
-              do.call(atan2,
-                      list(diff(`OMERC Northing`[c(1,2)]),
-                           diff(`OMERC Easting`[c(1,2)])))
+            do.call(
+              atan2,
+              list(
+                diff(`Float Northing`[c(1, 2)]),
+                diff(`Float Easting`[c(1, 2)])
+              )
+            ) -
+              do.call(
+                atan2,
+                list(
+                  diff(`OMERC Northing`[c(1, 2)]),
+                  diff(`OMERC Easting`[c(1, 2)])
+                )
+              )
           )
       } %>%
       as.numeric()
@@ -87,38 +110,41 @@ define_legacy_grid <-
     floating_scaler <-
       datums %>%
       sf::st_transform(datums_omerc) %>%
-      dplyr::mutate(`OMERC Easting` =
-                      sf::st_coordinates(geometry)[,'X'],
-                    `OMERC Northing` =
-                      sf::st_coordinates(geometry)[,'Y']) %$%
+      dplyr::mutate(
+        `OMERC Easting` =
+          sf::st_coordinates(geometry)[, "X"],
+        `OMERC Northing` =
+          sf::st_coordinates(geometry)[, "Y"]
+      ) %$%
       {
-
-        sqrt((diff(`Float Northing`[c(1,2)])^2) +
-               (diff(`Float Easting`[c(1,2)])^2)) /
-          sqrt((diff(`OMERC Northing`[c(1,2)])^2) +
-                 (diff(`OMERC Easting`[c(1,2)])^2))
-
+        sqrt((diff(`Float Northing`[c(1, 2)])^2) +
+          (diff(`Float Easting`[c(1, 2)])^2)) /
+          sqrt((diff(`OMERC Northing`[c(1, 2)])^2) +
+            (diff(`OMERC Easting`[c(1, 2)])^2))
       } %>%
       as.numeric()
 
     out_proj <-
-      list(proj = "omerc",
-           lat_0 = pt_0_geo[[2]],
-           lonc = pt_0_geo[[1]],
-           alpha = floating_rotation,
-           gamma = 0,
-           k_0 = floating_scaler,
-           x_0 = pt_0_grid[[1]],
-           y_0 = pt_0_grid[[2]]
+      list(
+        proj = "omerc",
+        lat_0 = pt_0_geo[[2]],
+        lonc = pt_0_geo[[1]],
+        alpha = floating_rotation,
+        gamma = 0,
+        k_0 = floating_scaler,
+        x_0 = pt_0_grid[[1]],
+        y_0 = pt_0_grid[[2]]
       ) %>%
       as_proj() %>%
       sf::st_crs()
 
-    if(!is.null(name))
+    if (!is.null(name)) {
       out_proj$wkt %<>%
-      stringr::str_replace_all(pattern = "unknown",
-                               replacement = name)
+        stringr::str_replace_all(
+          pattern = "unknown",
+          replacement = name
+        )
+    }
 
     out_proj
-
   }

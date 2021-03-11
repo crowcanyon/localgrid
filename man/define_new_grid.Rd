@@ -11,12 +11,12 @@ define_new_grid(pt_0_geo, pt_0_grid = c(0, 0), name = NULL)
 (\code{c(longitude, latitude)}) of the primary datum,
 in WGS84 decimal degrees}
 
-\item{name}{An optional name for the floating grid coordinate
-reference system}
-
-\item{pt_0_grid_x}{A numeric vector of the geographic coordinates
+\item{pt_0_grid}{A numeric vector of the geographic coordinates
 (\code{c(easting, northing)}) of the primary datum,
 in local coordinates (defaults to \code{c(0,0)})}
+
+\item{name}{An optional name for the floating grid coordinate
+reference system}
 }
 \value{
 Object of class \code{crs}, which is a list with elements \code{input}
@@ -34,8 +34,8 @@ primary datum for a new floating grid.
 }
 \examples{
 define_new_grid(
-    pt_0_geo = c(-108.51, 37.385),
-    pt_0_grid = c(500, 500),
-    name = NULL
-    )
+  pt_0_geo = c(-108.51, 37.385),
+  pt_0_grid = c(500, 500),
+  name = "Great New Grid"
+)
 }

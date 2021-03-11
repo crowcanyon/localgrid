@@ -2,11 +2,7 @@
 title: "Defining Accurate Floating Coordinate Reference Systems for Legacy Crow Canyon Projects"
 author: "Kyle Bocinsky"
 date: "8/20/2020"
-output:
-  rmarkdown::html_vignette:
-    toc: true
-    toc_float: true
-    theme: united
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Defining Accurate Floating Coordinate Reference Systems for Legacy Crow Canyon Projects}
   %\VignetteEncoding{UTF-8}

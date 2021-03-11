@@ -16,7 +16,9 @@ knitr::opts_chunk$set(
 # localgrid
 
 <!-- badges: start -->
-`r lifecycle::badge('experimental')`
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test coverage](https://codecov.io/gh/crowcanyon/localgrid/branch/master/graph/badge.svg)](https://codecov.io/gh/crowcanyon/localgrid?branch=master)
+[![R-CMD-check](https://github.com/crowcanyon/localgrid/workflows/R-CMD-check/badge.svg)](https://github.com/crowcanyon/localgrid/actions)
 <!-- badges: end -->
 
 The goal of `localgrid` is to make it easy to define coordinate reference 
