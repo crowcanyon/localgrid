@@ -14,7 +14,9 @@
 #' @param pt_0_grid A numeric vector of the geographic coordinates
 #' (`c(easting, northing)`) of the primary datum,
 #' in local coordinates (defaults to `c(0,0)`)
-#' @param name An optional name for the floating grid coordinate
+#' @param geo_crs The coordinate reference system of the geographic coordinates,
+#' defined using any method used by `[sf::st_crs()]`
+#' #' @param name An optional name for the floating grid coordinate
 #' reference system
 #'
 #' @return Object of class `crs`, which is a list with elements `input`
@@ -28,10 +30,22 @@
 #'   pt_0_grid = c(500, 500),
 #'   name = "Great New Grid"
 #' )
+#'
+#' # Or define from a different coordinate reference system:
+#' define_new_grid(
+#'   pt_0_geo = c(720446.8, 4140492.5),
+#'   pt_0_grid = c(500, 500),
+#'   geo_crs = 6341,
+#'   name = "Great New Grid"
+#' )
 define_new_grid <-
   function(pt_0_geo,
            pt_0_grid = c(0, 0),
+           geo_crs = 4326,
            name = NULL) {
+    pt_0_geo %<>%
+      as_wgs84(crs = geo_crs)
+
     out_proj <-
       list(
         proj = "omerc",

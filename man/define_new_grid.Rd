@@ -4,7 +4,7 @@
 \alias{define_new_grid}
 \title{Define a floating grid coordinate reference system for a new grid}
 \usage{
-define_new_grid(pt_0_geo, pt_0_grid = c(0, 0), name = NULL)
+define_new_grid(pt_0_geo, pt_0_grid = c(0, 0), geo_crs = 4326, name = NULL)
 }
 \arguments{
 \item{pt_0_geo}{A numeric vector of the geographic coordinates
@@ -15,7 +15,9 @@ in WGS84 decimal degrees}
 (\code{c(easting, northing)}) of the primary datum,
 in local coordinates (defaults to \code{c(0,0)})}
 
-\item{name}{An optional name for the floating grid coordinate
+\item{geo_crs}{The coordinate reference system of the geographic coordinates,
+defined using any method used by \verb{[sf::st_crs()]}
+#' @param name An optional name for the floating grid coordinate
 reference system}
 }
 \value{
@@ -36,6 +38,14 @@ primary datum for a new floating grid.
 define_new_grid(
   pt_0_geo = c(-108.51, 37.385),
   pt_0_grid = c(500, 500),
+  name = "Great New Grid"
+)
+
+# Or define from a different coordinate reference system:
+define_new_grid(
+  pt_0_geo = c(720446.8, 4140492.5),
+  pt_0_grid = c(500, 500),
+  geo_crs = 6341,
   name = "Great New Grid"
 )
 }

@@ -9,6 +9,7 @@ define_legacy_grid(
   pt_0_grid = c(0, 0),
   pt_1_geo,
   pt_1_grid,
+  geo_crs = 4326,
   name = NULL
 )
 }
@@ -28,6 +29,9 @@ in WGS84 decimal degrees}
 \item{pt_1_grid}{A numeric vector of the geographic coordinates
 (\code{c(easting, northing)}) of the secondary point,
 in local coordinates}
+
+\item{geo_crs}{The coordinate reference system of the geographic coordinates.
+Can be defined using any method used by \verb{[sf::st_crs()]}.}
 
 \item{name}{An optional name for the floating grid coordinate
 reference system}
@@ -53,5 +57,15 @@ define_legacy_grid(
   pt_1_geo = c(-108.511, 37.384),
   pt_1_grid = c(360, 380),
   name = "Screwy Legacy Grid"
+)
+
+# Or define from a different coordinate reference system:
+define_legacy_grid(
+  pt_0_geo = c(720446.8, 4140492.5),
+  pt_0_grid = c(500, 500),
+  pt_1_geo = c(720361.2, 4140379.2),
+  pt_1_grid = c(360, 380),
+  geo_crs = 6341,
+  name = "Great New Grid"
 )
 }

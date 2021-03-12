@@ -198,6 +198,61 @@
 <span class="co">#&gt;         AXIS["(N)",north,</span>
 <span class="co">#&gt;             ORDER[2],</span>
 <span class="co">#&gt;             LENGTHUNIT["metre",1,</span>
+<span class="co">#&gt;                 ID["EPSG",9001]]]]</span>
+
+<span class="co"># You can also use projected geographic points</span>
+<span class="fu"><a href="reference/define_legacy_grid.html">define_legacy_grid</a></span><span class="op">(</span>
+  pt_0_geo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">720446.8</span>, <span class="fl">4140492.5</span><span class="op">)</span>,
+  pt_0_grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">500</span><span class="op">)</span>,
+  pt_1_geo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">720361.2</span>, <span class="fl">4140379.2</span><span class="op">)</span>,
+  pt_1_grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">360</span>, <span class="fl">380</span><span class="op">)</span>,
+  geo_crs <span class="op">=</span> <span class="fl">6341</span>,
+  name <span class="op">=</span> <span class="st">"Great New Grid"</span>
+<span class="op">)</span>
+<span class="co">#&gt; Coordinate Reference System:</span>
+<span class="co">#&gt;   User input: +proj=omerc +lat_0=37.384999622921 +lonc=-108.509999731967 +alpha=-10.8146235871119 +gamma=0 +k_0=1.29877699316682 +x_0=500 +y_0=500 </span>
+<span class="co">#&gt;   wkt:</span>
+<span class="co">#&gt; PROJCRS["Great New Grid",</span>
+<span class="co">#&gt;     BASEGEOGCRS["Great New Grid",</span>
+<span class="co">#&gt;         DATUM["World Geodetic System 1984",</span>
+<span class="co">#&gt;             ELLIPSOID["WGS 84",6378137,298.257223563,</span>
+<span class="co">#&gt;                 LENGTHUNIT["metre",1]],</span>
+<span class="co">#&gt;             ID["EPSG",6326]],</span>
+<span class="co">#&gt;         PRIMEM["Greenwich",0,</span>
+<span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="co">#&gt;             ID["EPSG",8901]]],</span>
+<span class="co">#&gt;     CONVERSION["Great New Grid",</span>
+<span class="co">#&gt;         METHOD["Hotine Oblique Mercator (variant B)",</span>
+<span class="co">#&gt;             ID["EPSG",9815]],</span>
+<span class="co">#&gt;         PARAMETER["Latitude of projection centre",37.384999622921,</span>
+<span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="co">#&gt;             ID["EPSG",8811]],</span>
+<span class="co">#&gt;         PARAMETER["Longitude of projection centre",-108.509999731967,</span>
+<span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="co">#&gt;             ID["EPSG",8812]],</span>
+<span class="co">#&gt;         PARAMETER["Azimuth of initial line",-10.8146235871119,</span>
+<span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="co">#&gt;             ID["EPSG",8813]],</span>
+<span class="co">#&gt;         PARAMETER["Angle from Rectified to Skew Grid",0,</span>
+<span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="co">#&gt;             ID["EPSG",8814]],</span>
+<span class="co">#&gt;         PARAMETER["Scale factor on initial line",1.29877699316682,</span>
+<span class="co">#&gt;             SCALEUNIT["unity",1],</span>
+<span class="co">#&gt;             ID["EPSG",8815]],</span>
+<span class="co">#&gt;         PARAMETER["Easting at projection centre",500,</span>
+<span class="co">#&gt;             LENGTHUNIT["metre",1],</span>
+<span class="co">#&gt;             ID["EPSG",8816]],</span>
+<span class="co">#&gt;         PARAMETER["Northing at projection centre",500,</span>
+<span class="co">#&gt;             LENGTHUNIT["metre",1],</span>
+<span class="co">#&gt;             ID["EPSG",8817]]],</span>
+<span class="co">#&gt;     CS[Cartesian,2],</span>
+<span class="co">#&gt;         AXIS["(E)",east,</span>
+<span class="co">#&gt;             ORDER[1],</span>
+<span class="co">#&gt;             LENGTHUNIT["metre",1,</span>
+<span class="co">#&gt;                 ID["EPSG",9001]]],</span>
+<span class="co">#&gt;         AXIS["(N)",north,</span>
+<span class="co">#&gt;             ORDER[2],</span>
+<span class="co">#&gt;             LENGTHUNIT["metre",1,</span>
 <span class="co">#&gt;                 ID["EPSG",9001]]]]</span></code></pre></div>
 </div>
 <div id="code-of-conduct" class="section level2">

@@ -128,7 +128,7 @@ Oblique Mercator projection for a new floating grid
 based on the coordinates for a primary datum.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>define_new_grid</span><span class='op'>(</span><span class='va'>pt_0_geo</span>, pt_0_grid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>, name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>define_new_grid</span><span class='op'>(</span><span class='va'>pt_0_geo</span>, pt_0_grid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span>, geo_crs <span class='op'>=</span> <span class='fl'>4326</span>, name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,8 +146,10 @@ in WGS84 decimal degrees</p></td>
 in local coordinates (defaults to <code><a href='https://rdrr.io/r/base/c.html'>c(0,0)</a></code>)</p></td>
     </tr>
     <tr>
-      <th>name</th>
-      <td><p>An optional name for the floating grid coordinate
+      <th>geo_crs</th>
+      <td><p>The coordinate reference system of the geographic coordinates,
+defined using any method used by <code>[sf::st_crs()]</code>
+#' @param name An optional name for the floating grid coordinate
 reference system</p></td>
     </tr>
     </table>
@@ -212,7 +214,60 @@ primary datum for a new floating grid.</p>
 #&gt;         AXIS["(N)",north,
 #&gt;             ORDER[2],
 #&gt;             LENGTHUNIT["metre",1,
-#&gt;                 ID["EPSG",9001]]]]</div></pre>
+#&gt;                 ID["EPSG",9001]]]]</div><div class='input'>
+<span class='co'># Or define from a different coordinate reference system:</span>
+<span class='fu'>define_new_grid</span><span class='op'>(</span>
+  pt_0_geo <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>720446.8</span>, <span class='fl'>4140492.5</span><span class='op'>)</span>,
+  pt_0_grid <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>500</span>, <span class='fl'>500</span><span class='op'>)</span>,
+  geo_crs <span class='op'>=</span> <span class='fl'>6341</span>,
+  name <span class='op'>=</span> <span class='st'>"Great New Grid"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt; Coordinate Reference System:
+#&gt;   User input: +proj=omerc +lat_0=37.384999622921 +lonc=-108.509999731967 +alpha=0 +gamma=0 +k_0=1 +x_0=500 +y_0=500 
+#&gt;   wkt:
+#&gt; PROJCRS["Great New Grid",
+#&gt;     BASEGEOGCRS["Great New Grid",
+#&gt;         DATUM["World Geodetic System 1984",
+#&gt;             ELLIPSOID["WGS 84",6378137,298.257223563,
+#&gt;                 LENGTHUNIT["metre",1]],
+#&gt;             ID["EPSG",6326]],
+#&gt;         PRIMEM["Greenwich",0,
+#&gt;             ANGLEUNIT["degree",0.0174532925199433],
+#&gt;             ID["EPSG",8901]]],
+#&gt;     CONVERSION["Great New Grid",
+#&gt;         METHOD["Hotine Oblique Mercator (variant B)",
+#&gt;             ID["EPSG",9815]],
+#&gt;         PARAMETER["Latitude of projection centre",37.384999622921,
+#&gt;             ANGLEUNIT["degree",0.0174532925199433],
+#&gt;             ID["EPSG",8811]],
+#&gt;         PARAMETER["Longitude of projection centre",-108.509999731967,
+#&gt;             ANGLEUNIT["degree",0.0174532925199433],
+#&gt;             ID["EPSG",8812]],
+#&gt;         PARAMETER["Azimuth of initial line",0,
+#&gt;             ANGLEUNIT["degree",0.0174532925199433],
+#&gt;             ID["EPSG",8813]],
+#&gt;         PARAMETER["Angle from Rectified to Skew Grid",0,
+#&gt;             ANGLEUNIT["degree",0.0174532925199433],
+#&gt;             ID["EPSG",8814]],
+#&gt;         PARAMETER["Scale factor on initial line",1,
+#&gt;             SCALEUNIT["unity",1],
+#&gt;             ID["EPSG",8815]],
+#&gt;         PARAMETER["Easting at projection centre",500,
+#&gt;             LENGTHUNIT["metre",1],
+#&gt;             ID["EPSG",8816]],
+#&gt;         PARAMETER["Northing at projection centre",500,
+#&gt;             LENGTHUNIT["metre",1],
+#&gt;             ID["EPSG",8817]]],
+#&gt;     CS[Cartesian,2],
+#&gt;         AXIS["(E)",east,
+#&gt;             ORDER[1],
+#&gt;             LENGTHUNIT["metre",1,
+#&gt;                 ID["EPSG",9001]]],
+#&gt;         AXIS["(N)",north,
+#&gt;             ORDER[2],
+#&gt;             LENGTHUNIT["metre",1,
+#&gt;                 ID["EPSG",9001]]]]</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,5 +294,3 @@ primary datum for a new floating grid.</p>
 
   </body>
 </html>
-
-
